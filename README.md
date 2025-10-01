@@ -14,13 +14,12 @@ Run the following command in your terminal. It will download and execute the ins
 
 ### Prerequisites
 
-- **`llama-swap`:** The `llama-swap` (or `llama-swap-darwin-arm64`) executable must be installed and available in your shell's `PATH`. If you don't have it, you can install it using the script in the [ggml-tools-installer repository](https://github.com/huajiejin/ggml-tools-installer).
+- **`llama-swap` & `llama-server`:** The `llama-swap` (or `llama-swap-darwin-arm64`) and `llama-server` executables must be installed and available in your shell's `PATH`. If you don't have them, you can install them using the script in the [ggml-tools-installer repository](https://github.com/huajiejin/ggml-tools-installer).
 
 ### What the Installer Does
 
-1.  **Finds Binary:** Automatically locates the `llama-swap` and `llama-server` executables in your `PATH`.
-2.  **Creates Config:** Places a default configuration file at `~/.llama-swap.config.yml` if one doesn't already exist.
-3.  **Sets up Service:** Creates and loads a `launchd` service file in `~/Library/LaunchAgents`.
+1. **Creates Config:** Places a default configuration file at `~/.llama-swap.config.yml` if one doesn't already exist.
+2. **Sets up Service:** Creates and loads a `launchd` service file at `~/Library/LaunchAgents/llama-swap-service.plist`.
 
 ### Managing the Service
 
@@ -43,7 +42,7 @@ Run the following command in your terminal. It will download and execute the ins
 
 ### Uninstallation
 
-To remove the service and all associated files, you can run the uninstaller script:
+To remove the service and associated files, you can run the uninstaller script:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/huajiejin/llama-swap-service-macos/main/uninstall.sh)"
