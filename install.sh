@@ -83,7 +83,7 @@ launchctl unload "$PLIST_DEST" 2>/dev/null || true
 launchctl load "$PLIST_DEST"
 
 echo -e "\n${C_GREEN}Success! The llama-swap service is installed and loaded.${C_NONE}"
-echo "-> llama-swap should be running on http://127.0.0.1:12345"
+echo "-> llama-swap should be running on http://127.0.0.1:11000"
 echo "-> To check its status, run: launchctl list | grep llama-swap"
 echo "-> Logs are available at:"
 echo "  $HOME/.llama-swap-service.log"

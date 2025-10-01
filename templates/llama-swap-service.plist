@@ -11,7 +11,7 @@
         <string>--config</string>
         <string>__LLAMA_SWAP_CONFIG_PATH__</string>
         <string>--listen</string>
-        <string>127.0.0.1:12345</string>
+        <string>127.0.0.1:11000</string>
         <string>--watch-config</string>
         <string>true</string>
     </array>

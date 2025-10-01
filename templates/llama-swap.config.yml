@@ -2,7 +2,7 @@
 # Supported OpenAI API: https://github.com/mostlygeek/llama-swap?tab=readme-ov-file#features
 healthCheckTimeout: 500
 logLevel: info
-startPort: 12346
+startPort: 11001
 
 macros:
   "llama_server": >
