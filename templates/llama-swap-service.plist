@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>llama-swap-service</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>__LLAMA_SWAP_BINARY_PATH__</string>
+        <string>--config</string>
+        <string>__LLAMA_SWAP_CONFIG_PATH__</string>
+        <string>--listen</string>
+        <string>127.0.0.1:12345</string>
+        <string>--watch-config</string>
+        <string>true</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <dict>
+        <key>SuccessfulExit</key>
+        <false/>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>__HOME_PATH__/.llama-swap-service.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>__HOME_PATH__/.llama-swap-service.err</string>
+
+    <key>ThrottleInterval</key>
+    <integer>10</integer>
+</dict>
+</plist>

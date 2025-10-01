@@ -1,0 +1,61 @@
+# Config examples: https://github.com/mostlygeek/llama-swap/wiki/Configuration
+# Supported OpenAI API: https://github.com/mostlygeek/llama-swap?tab=readme-ov-file#features
+healthCheckTimeout: 500
+logLevel: info
+startPort: 12346
+
+macros:
+  "llama_server": >
+    __LLAMA_SERVER_BINARY_PATH__
+    --host 127.0.0.1
+    --port ${PORT}
+  "common_model_params": >
+    --prio 2
+    --jinja
+    --reasoning-format auto
+    --ubatch-size 2048
+    --batch-size 2048
+    --n-gpu-layers 99
+    --flash-attn on
+    --api-key-file __LLAMA_SERVER_API_KEY_FILE_PATH__
+
+models:
+  "qwen3_4b_2507_q8":
+    checkEndpoint: /health
+    filters:
+      strip_params: "temperature, top_k, top_p, repeat_penalty, presence_penalty"
+    cmd: |
+      ${llama_server}
+      --hf-repo ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF
+      --hf-file qwen3-4b-instruct-2507-q8_0.gguf
+      --alias qwen3_4b_2507_q8
+      ${model_params_qwen3}
+      --ctx-size 10240
+      --temp 0.7
+      --top-p 0.8
+      --top-k 20
+      --min-p 0
+      --presence-penalty 1.05
+      --reasoning-budget 0
+    ttl: 600
+
+  "gpt_oss_20b":
+    checkEndpoint: /health
+    cmd: |
+      ${llama_server}
+      -hf ggml-org/gpt-oss-20b-GGUF
+      --alias gpt_oss_20b
+      ${common_model_params}
+      --temp 1.0
+      --top-p 1.0
+      --chat-template-kwargs '{"reasoning_effort": "low", "model_identity": "You are Arya Stark of Winterfell, a fighter trained by NoOne."}'
+    ttl: 600
+
+groups:
+  "llm":
+    swap: true
+    persistent: true
+    exclusive: false
+    members:
+      - "qwen3_4b_2507_q8"
+      - "gpt_oss_20b"
