@@ -30,7 +30,7 @@ find_binary_path() {
 }
 
 
-# 1. Find binaries
+# Find binaries
 LLAMA_SWAP_BINARY_PATH=$(find_binary_path llama-swap llama-swap-darwin-arm64)
 
 if [[ -z "$LLAMA_SWAP_BINARY_PATH" ]]; then
@@ -49,7 +49,12 @@ if [[ -z "$LLAMA_SERVER_BINARY_PATH" ]]; then
 fi
 echo "-> Found binary at: $LLAMA_SERVER_BINARY_PATH"
 
-# 2. Create default config
+# Create config and other files
+if [ ! -f "$LLAMA_SERVER_API_KEY_FILE_PATH" ]; then
+  # Create the file if it does not exist
+  touch "$LLAMA_SERVER_API_KEY_FILE_PATH"
+fi
+
 if [ ! -f "$LLAMA_SWAP_CONFIG_FILE" ]; then
     echo "-> No existing config found. Creating default at $LLAMA_SWAP_CONFIG_FILE"
 	config_template=$(curl -fsSL "https://raw.githubusercontent.com/huajiejin/llama-swap-service-macos/main/templates/llama-swap.config.yml")
@@ -61,7 +66,7 @@ else
     echo "-> Using existing configuration at $LLAMA_SWAP_CONFIG_FILE"
 fi
 
-# 3. Create and install the launchd plist
+# Create and install the launchd plist
 echo "-> Creating and installing launchd service..."
 
 # Fetch the plist template and substitute placeholders
