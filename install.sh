@@ -24,19 +24,16 @@ find_binary_path() {
             # Ensure it's an absolute path to avoid aliases
             if [[ "$path_check" == /* ]]; then
                 echo "$path_check"
-                return 0
             fi
         fi
     done
-    # Return a non-zero exit code if no binary is found
-    return 1
 }
 
 
 # 1. Find binaries
 LLAMA_SWAP_BINARY_PATH=$(find_binary_path llama-swap llama-swap-darwin-arm64)
 
-if [ -z "$LLAMA_SWAP_BINARY_PATH" ]; then
+if [[ -z "$LLAMA_SWAP_BINARY_PATH" ]]; then
     echo -e "${C_RED}Error: 'llama-swap' executable not found in your PATH.${C_NONE}"
     echo "Please install llama-swap and ensure its location is in your PATH."
     exit 1
@@ -45,7 +42,7 @@ echo "-> Found binary at: $LLAMA_SWAP_BINARY_PATH"
 
 LLAMA_SERVER_BINARY_PATH=$(find_binary_path llama-server)
 
-if [ -z "$LLAMA_SERVER_BINARY_PATH" ]; then
+if [[ -z "$LLAMA_SERVER_BINARY_PATH" ]]; then
     echo -e "${C_RED}Error: 'llama-server' executable not found in your PATH.${C_NONE}"
     echo "Please install llama-server (llama.cpp) and ensure its location is in your PATH."
     exit 1
@@ -82,7 +79,7 @@ launchctl load "$PLIST_DEST"
 
 echo -e "\n${C_GREEN}Success! The llama-swap service is installed and loaded.${C_NONE}"
 echo "-> llama-swap should be running on http://127.0.0.1:12345"
-echo "-> To check its status, run: ${C_YELLOW}launchctl list | grep llama-swap${C_NONE}"
+echo "-> To check its status, run: launchctl list | grep llama-swap"
 echo "-> Logs are available at:"
-echo "  ${C_YELLOW}$HOME/.llama-swap-service.log${C_NONE}"
-echo "  ${C_YELLOW}$HOME/.llama-swap-service.err${C_NONE}"
+echo "  $HOME/.llama-swap-service.log"
+echo "  $HOME/.llama-swap-service.err"
