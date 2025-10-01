@@ -33,5 +33,13 @@
 
     <key>ThrottleInterval</key>
     <integer>10</integer>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin</string>
+        <key>METAL_DEVICE_WRAPPER_TYPE</key>
+        <string>1</string>
+    </dict>
 </dict>
 </plist>
