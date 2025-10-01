@@ -54,14 +54,14 @@ echo "-> Found binary at: $LLAMA_SERVER_BINARY_PATH"
 
 # 2. Create default config
 if [ ! -f "$LLAMA_SWAP_CONFIG_FILE" ]; then
-    echo "-> No existing config found. Creating default at '$LLAMA_SWAP_CONFIG_FILE'."
+    echo "-> No existing config found. Creating default at $LLAMA_SWAP_CONFIG_FILE"
 	config_template=$(curl -fsSL "https://raw.githubusercontent.com/huajiejin/llama-swap-service-macos/main/templates/llama-swap.config.yml")
 	config_content=$(echo "$config_template" | sed \
 		-e "s|__LLAMA_SERVER_API_KEY_FILE_PATH__|$LLAMA_SERVER_API_KEY_FILE_PATH|g" \
 		-e "s|__LLAMA_SERVER_BINARY_PATH__|$LLAMA_SERVER_BINARY_PATH|g")
 	echo "$config_content" > "$LLAMA_SWAP_CONFIG_FILE"
 else
-    echo "-> Using existing configuration at '$LLAMA_SWAP_CONFIG_FILE'."
+    echo "-> Using existing configuration at $LLAMA_SWAP_CONFIG_FILE"
 fi
 
 # 3. Create and install the launchd plist
@@ -80,9 +80,9 @@ echo "$plist_content" > "$PLIST_DEST"
 launchctl unload "$PLIST_DEST" 2>/dev/null || true
 launchctl load "$PLIST_DEST"
 
-echo -e "\n${C_GREEN}Success! The llama-swap service is installed and running.${C_NONE}"
+echo -e "\n${C_GREEN}Success! The llama-swap service is installed and loaded.${C_NONE}"
+echo "-> llama-swap should be running on http://127.0.0.1:12345"
 echo "-> To check its status, run: ${C_YELLOW}launchctl list | grep llama-swap${C_NONE}"
 echo "-> Logs are available at:"
 echo "  ${C_YELLOW}$HOME/.llama-swap-service.log${C_NONE}"
 echo "  ${C_YELLOW}$HOME/.llama-swap-service.err${C_NONE}"
-echo "llama-swap is running on http://127.0.0.1:12345"
