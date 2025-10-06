@@ -7,6 +7,7 @@ PLIST_LABEL=$PROJECT_NAME
 LLAMA_SWAP_CONFIG_FILE="$HOME/.llama-swap.config.yml"
 PLIST_DEST="$HOME/Library/LaunchAgents/${PLIST_LABEL}.plist"
 LLAMA_SERVER_API_KEY_FILE_PATH="$HOME/.llama_server_api_keys.txt"
+LLAMA_SWAP_SERVICE_WORKING_DIR="$HOME/.llama-swap-service-working-dir"
 
 # --- Colors for beautiful output ---
 C_GREEN='\033[0;32m'
@@ -65,6 +66,8 @@ if [ ! -f "$LLAMA_SWAP_CONFIG_FILE" ]; then
 else
     echo "-> Using existing configuration at $LLAMA_SWAP_CONFIG_FILE"
 fi
+
+mkdir -p "$LLAMA_SWAP_SERVICE_WORKING_DIR"
 
 # Create and install the launchd plist
 echo "-> Creating and installing launchd service..."

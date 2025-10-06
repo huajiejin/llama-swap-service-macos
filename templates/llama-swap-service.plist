@@ -25,6 +25,9 @@
         <false/>
     </dict>
 
+	<key>WorkingDirectory</key>
+	<string>__HOME_PATH__/.llama-swap-service-working-dir</string>
+
     <key>StandardOutPath</key>
     <string>__HOME_PATH__/.llama-swap-service.log</string>
 
